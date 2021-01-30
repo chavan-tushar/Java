@@ -1,0 +1,55 @@
+package com.chavan;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args){
+        BankAccount bankAccount = new BankAccount();
+        Scanner scanner = new Scanner(System.in);
+
+        bankAccount.setBalance(41000);
+        bankAccount.setAccountNumber(123456);
+        bankAccount.setCustomerName("Tushar");
+        bankAccount.setEmail("tushu01@gmail.com");
+        bankAccount.setPhoneNumber("9619991406");
+
+        boolean hasNextInt = false;
+        double amt = 0;
+        while(true){
+            System.out.println("Welcome to Banking App. Please enter your choice below. \nPress 1 to Deposit Amount.\nPress 2 to Withdraw Amount.\nPress 3 to Exit.");
+
+            hasNextInt = scanner.hasNextInt();
+
+            if(hasNextInt){
+                double choice = scanner.nextInt();
+                scanner.nextLine();
+
+                if(choice  == 1 || choice == 2){
+                    String action = (choice==1)?"Deposit":"Withdraw";
+                    System.out.println("Please enter amount to "+action);
+                    if (scanner.hasNextInt()){
+                        amt = scanner.nextDouble();
+                        scanner.nextLine();
+                        if(choice == 1){
+                            bankAccount.deposit(amt);
+                        }else{
+                            bankAccount.withdraw(amt);
+                        }
+                    }else{
+                        System.out.println("Please enter correct Amount\n");
+                    }
+
+
+                }else if (choice == 3){
+                    break;
+                }else{
+                    System.out.println("Invalid Input.\n\n");
+                }
+
+            }else{
+                System.out.println("Please check your response.\n\n");
+                scanner.nextLine();
+            }
+        }
+    }
+}
